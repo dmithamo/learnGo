@@ -14,21 +14,21 @@ package main
 
 import "fmt"
 
-func main ()  {
+func main() {
 	estimateRoot(225)
 }
 
-func estimateRoot(number int){
+func estimateRoot(number int) {
 	numAsFloat := float64(number)
 	accuracy := 0.0000001
-	guess := 1.0;
+	guess := 1.0
 	numberOfGuesses := 0
 	// This algorithm is a blackbox to me :}
 	fmt.Printf("------\nCalculating the squareroot of %v by pure guesswork\n", number)
 
-	for guess * guess - numAsFloat > accuracy || numAsFloat - guess * guess > accuracy {
+	for guess*guess-numAsFloat > accuracy || numAsFloat-guess*guess > accuracy {
 
-		guess -= (guess * guess - numAsFloat) / (2*guess)
+		guess -= (guess*guess - numAsFloat) / (2 * guess)
 		numberOfGuesses++
 
 		printTheProcess(numberOfGuesses, guess)
@@ -37,6 +37,6 @@ func estimateRoot(number int){
 	fmt.Printf("We figured that out in %v guesses\n-------\n", numberOfGuesses)
 }
 
-func printTheProcess(timesGuessed int, currentGuess float64){
+func printTheProcess(timesGuessed int, currentGuess float64) {
 	fmt.Printf("\tGuess number: %v <<>> Value %v\n", timesGuessed, currentGuess)
 }
