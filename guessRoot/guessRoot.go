@@ -12,29 +12,45 @@ Implement this in the func Sqrt provided. A decent starting guess for z is 1, no
 
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 func main() {
-	estimateRoot(225)
+	root, err := estimateRoot(225)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println("Square root of 225 is", root)
 }
 
-func estimateRoot(number int) {
+func estimateRoot(number int) (interface{}, error) {
+	// return error if number is negative
+	if number < 0 {
+		return 0, errors.New("math error: cannot get square root of negative number")
+	}
+
 	numAsFloat := float64(number)
 	accuracy := 0.0000001
 	guess := 1.0
 	numberOfGuesses := 0
-	// This algorithm is a blackbox to me :}
+
 	fmt.Printf("------\nCalculating the squareroot of %v by pure guesswork\n", number)
 
 	for guess*guess-numAsFloat > accuracy || numAsFloat-guess*guess > accuracy {
 
+		// This algorithm is a blackbox to me :}
 		guess -= (guess*guess - numAsFloat) / (2 * guess)
 		numberOfGuesses++
 
 		printTheProcess(numberOfGuesses, guess)
 	}
-	fmt.Printf("------\nThe squareroot of %v approaches %v\n", number, guess)
-	fmt.Printf("We figured that out in %v guesses\n-------\n", numberOfGuesses)
+
+	return guess, nil
 }
 
 func printTheProcess(timesGuessed int, currentGuess float64) {
