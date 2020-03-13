@@ -14,9 +14,9 @@ func main() {
 func spinner(delay time.Duration) {
 	percentageDone := 0.
 	for {
-			fmt.Printf("\r[%v  %%]", percentageDone)
-			percentageDone += 1.52
-			time.Sleep(delay)
+		fmt.Printf("\r[%v  %%]", percentageDone)
+		percentageDone += 1.52
+		time.Sleep(delay)
 	}
 }
 func fib(x int) int {
